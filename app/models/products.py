@@ -1,6 +1,6 @@
 from app import db
 import uuid
-
+#getting details
 class Products(db.Model):
     __tablename__ = "products"
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +12,7 @@ class Products(db.Model):
     selling_price = db.Column(db.Float)
 
     @staticmethod
+    #creating dictionary using the details of products
     def create(name, image, rating, marked_price, selling_price):
         product_dict = dict(
             guid = str(uuid.uuid4()),
@@ -24,7 +25,7 @@ class Products(db.Model):
         product_obj = Products(**product_dict)
         db.session.add(product_obj)
         db.session.commit()
-
+# update the details
     def update(self, **details_dict):
         for k,v in details_dict.items():
             setattr(self, k, v)
