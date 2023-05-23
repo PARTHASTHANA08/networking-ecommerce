@@ -1,3 +1,4 @@
+#importing
 from flask import Blueprint, jsonify, request, session, redirect, url_for, send_file
 from app.models.users import Users
 from app.models.address import Address
@@ -12,6 +13,7 @@ api = Blueprint('api', __name__, url_prefix="/api")
 UPLOAD_FOLDER = os.path.abspath("app/static/attachments")
 
 @api.route('/login', methods=['POST'])
+# login wth credentials, if wrong show error message
 def login():
     try:
         email = request.json.get('email')
@@ -44,6 +46,7 @@ def login():
         }), 400
 
 @api.route("/logout", methods=["POST"])
+#show logout page 
 def logout():
     try:
         session["email"] = None
@@ -60,6 +63,7 @@ def logout():
         }), 400
 
 @api.route("/add-address", methods=["POST"])
+#seeing the details 
 def add_address():
     try:
         house_number = request.json.get("house_number")
@@ -83,6 +87,7 @@ def add_address():
         }), 400
 
 @api.route("/create-order", methods=["POST"])
+# placing order using details
 def create_order():
     try:
         user_email = session.get("email")
@@ -104,6 +109,7 @@ def create_order():
         }), 400
 
 @api.route("/submit-help", methods=["POST"])
+# asking for help in the help page 
 def submit_help():
     title = request.form.get("title")
     description = request.form.get("description")
@@ -122,10 +128,12 @@ def submit_help():
         )
 
 @api.route("/download/<path:filename>")
+#downloading attachments
 def download(filename):
     return send_file(os.path.join(UPLOAD_FOLDER, filename), as_attachment=True)
 
 @api.route("/search-order")
+# searching orders
 def search_order():
     order_id = request.args.get("order_id")
     user_email = session.get("email")
@@ -143,6 +151,7 @@ def search_order():
     }), 200
 
 @api.route("/execute", methods=["POST"])
+#gtting values from the json
 def execute():
     try:
         code = request.json.get("code")
@@ -170,6 +179,7 @@ def execute():
         }), 400
 
 @api.route("/get-customer")
+#collecting all the data of customer
 def get_customer():
     try:
         customer_id = request.args.get("id")
