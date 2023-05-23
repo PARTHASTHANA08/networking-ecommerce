@@ -1,6 +1,6 @@
 from app import db
 import uuid
-
+# creating class
 class Tickets(db.Model):
     __tablename__ = "tickets"
     id = db.Column(db.Integer, primary_key=True)
@@ -11,6 +11,7 @@ class Tickets(db.Model):
     attachment = db.Column(db.String(64))
 
     @staticmethod
+    #adding details to the tickets dictonary
     def create(user_id, title, description, attachment):
         ticket_dict = dict(
             guid = str(uuid.uuid4()),
@@ -22,7 +23,7 @@ class Tickets(db.Model):
         ticket_obj = Tickets(**ticket_dict)
         db.session.add(ticket_obj)
         db.session.commit()
-
+# updating the data
     def update(self, **details_dict):
         for k,v in details_dict.items():
             setattr(self, k, v)
