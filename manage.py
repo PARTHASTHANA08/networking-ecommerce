@@ -1,3 +1,4 @@
+#Importing
 from flask.cli import FlaskGroup
 from app import create_app, db
 from flask import current_app
@@ -16,7 +17,7 @@ from app.models.editor.company_orders import CompanyOrders
 from app.models.editor.order_item import OrderItems
 
 cli = FlaskGroup(create_app=create_app)
-
+#Json holding the values of the users
 user_json = [
 	{
 		"name": "John Doe",
@@ -109,7 +110,7 @@ user_json = [
 		"contact": "+250 782 980 146"
 	}
 ]
-
+#json holding the details of the products
 product_json = [
 	{
 		"name": "Sergeant Rodog AI",
@@ -189,12 +190,12 @@ product_json = [
 		"selling_price": "9.49"
 	}
 ]
-
+# Recreating the database
 def recreate_db():
 	db.drop_all()
 	db.create_all()
 	db.session.commit()
-
+# Reading the csv files to search for the user and the products
 def seeder():
 	for user in user_json:
 		Users.create(user.get("name"), user.get("email"), user.get("password"), user.get("contact"))
