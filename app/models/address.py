@@ -1,6 +1,6 @@
 from app import db
 import uuid
-# getting data from class of address
+# creating class of address
 class Address(db.Model):
     __tablename__ = "address"
     id = db.Column(db.Integer, primary_key=True)
@@ -13,7 +13,7 @@ class Address(db.Model):
     pin_code = db.Column(db.String)
 
     @staticmethod
-    #using the above data to make a dictionary
+    #adding data to the dictonary
     def create(user_id, house_number, city, state, country, pin_code):
         address_dict = dict(
             guid = str(uuid.uuid4()),
