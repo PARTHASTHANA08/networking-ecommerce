@@ -3,7 +3,7 @@ import uuid
 
 from app.models.products import Products
 from app.models.address import Address
-#getting details 
+#creating class 
 class Orders(db.Model):
     __tablename__ = "orders"
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +17,7 @@ class Orders(db.Model):
     amount = db.Column(db.Float)
 
     @staticmethod
-    # creating a dictionary using above details 
+    # adding details to the dictionary
     def create(user_id, product_id, quantity, address_id, amount):
         order_dict = dict(
             guid = str(uuid.uuid4()),
