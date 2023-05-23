@@ -4,7 +4,7 @@ import uuid
 from app.models.address import Address
 from app.models.orders import Orders
 from app.models.tickets import Tickets
-
+#creating class
 class Users(db.Model):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +18,7 @@ class Users(db.Model):
     tickets = db.relationship(Tickets, lazy=True, backref="user")
 
     @staticmethod
+    #adding details to the dictonary
     def create(name, email, password, contact):
 
         user_dict = dict(
@@ -32,7 +33,7 @@ class Users(db.Model):
         db.session.add(user_obj)
         db.session.commit()
 
-
+# updating the data 
     def update(self, **details_dict):
         for k,v in details_dict.items():
             setattr(self, k, v)
