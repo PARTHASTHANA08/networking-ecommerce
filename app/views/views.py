@@ -1,3 +1,4 @@
+#importing
 from flask import Blueprint, render_template, session, redirect, url_for, request, jsonify
 from app.models.products import Products
 from app.models.address import Address
@@ -11,6 +12,7 @@ views = Blueprint('views', __name__, url_prefix="/")
 
 @views.route('/')
 @cross_origin()
+#Viewing the login page or show error message
 def login():
     try:
         return render_template("/login/login.html")
@@ -22,6 +24,7 @@ def login():
 
 @views.route('/dashboard')
 @cross_origin()
+#viewing the dashboard page or show error message
 def dashboard():
     try:
         query = "select * from products;"
@@ -35,6 +38,7 @@ def dashboard():
 
 @views.route('/profile')
 @cross_origin()
+#viewing the profile page or show error message
 def profile():
     try:
         user_id = request.args.get("id")
@@ -55,6 +59,7 @@ def profile():
 
 @views.route('/order')
 @cross_origin()
+#viewing order page or show error message
 def order():
     try:
         product_id = request.args.get("id")
@@ -76,6 +81,7 @@ def order():
 
 @views.route("/help")
 @cross_origin()
+#viewing help page or show error message
 def help_page():
     try:
         return render_template("/help/help.html", user_id=session.get('user_id'))
@@ -87,6 +93,7 @@ def help_page():
 
 @views.route("/editor")
 @cross_origin()
+#viewing editor or show error message
 def editor():
     try:
         return render_template("/editor/editor.html")
